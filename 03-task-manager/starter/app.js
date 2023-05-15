@@ -1,10 +1,11 @@
-const http = require('http')
-const port = 5000
-const server = http.createServer((req,res)=>{
-    console.log(req.url)
-    res.write('<h1>Test</h1>')
-})
+const express = require('express')
+const app =express()
+const tasks = require('./routes/tasks.js')
 
-server.listen(5000, ()=>{
-    console.log(`Server is running on port : ${port}`)
-})
+app.use(express.json())
+
+app.use('/api/v1/tasks', tasks)
+
+
+const port = 3000
+app.listen(port, console.log(`Server is running on port: ${port} `))
